@@ -1126,4 +1126,50 @@ public class TestAutomataOperations extends TestCase {
             assertFalse(reversedAutomaton.accepts(word));
         }
     }
+
+
+/* Determinizacja automatu niedeterministycznego */
+
+public void testAutomatuAa()
+
+	{
+		AutomatonSpecification x= new Naive AutomatonSpecification();
+		 DeterministicAutomatonSpecification deterministicAutomat
+                = new NaiveDeterministicAutomatonSpecification();
+
+		state q0 = x.addState();
+		state q1 = x.addState();
+		state q2 = x.addState();
+		x.addTransition(q0,q1,newCharTransitionLabel('a'));
+		x.addTransition(q1,q2,newCharTransitionLabel('a'));
+		x.markAsInitial(q0);
+		x.markAsFinal(q1);
+		x.markAsFinal(q2);
+		
+		AutomatonByStack automata= new AutomatonByWStack(x);
+		
+		
+		try {
+            AutomataOperations.determinize2(x, deterministicAutomat);
+        } catch (Exception e) {
+            fail();
+        }
+
+		assert True(deterministicAutomat.accepts("aa");
+		assert False (deterministicAutomat.accepts("00");
+		assert True(deterministicAutomat.accepts("a");
+		assert False (deterministicAutomat.accepts("ab");
+		assert False (deterministicAutomat.accepts("bbb");
+		assert False (deterministicAutomat.accepts("003");
+		assert False (deterministicAutomat.accepts("%677");
+		assert False (deterministicAutomat.accepts("....");
+		assert False (deterministicAutomat.accepts("pop");
+		assert False (deterministicAutomat.accepts("233");
+		assert False (deterministicAutomat.accepts("aaaaaa");
+		assert False (deterministicAutomat.accepts("ba");
+		assert False (deterministicAutomat.accepts("ac");
+	
+	
+	}
+
 }
